@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+</head>
+<body>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Tab 1</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="add-tab-button" aria-controls="add" aria-selected="false">+</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+          Konten Tab 1
+        </div>
+        <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+          Konten Tab 2
+        </div>
+        <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
+          Konten Tab 3
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="tab-content-container">
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+var tabCount = 2;
+
+// Membuat tombol tambah tab
+$('#add-tab-button').click(function() {
+  tabCount++;
+  var newTab = $('<li class="nav-item"><a class="nav-link" id="tab' + tabCount + '-tab" data-toggle="tab" href="#tab' + tabCount + '" role="tab" aria-controls="tab' + tabCount + '" aria-selected="false">Tab ' + tabCount + '<i class="fa fa-times close-tab-button ml-2"></i></a></li>');
+  var newTabContent = $('<div class="tab-pane fade" id="tab' + tabCount + '" role="tabpanel" aria-labelledby="tab' + tabCount + '-tab">Konten Tab ' + tabCount + '</div>');
+
+  $('#myTab').append(newTab);
+  $('#myTabContent').append(newTabContent);
+
+  // Membuat tab yang aktif saat diklik
+  newTab.find('a').click(function () {
+    $('#myTabContent .tab-pane').removeClass('show active');
+    $('#myTab .nav-item a').removeClass('active');
+    $(this).addClass('active');
+    newTabContent.addClass('show active');
+  });
+
+  // Membuat tombol tutup tab
+  newTab.find('.close-tab-button').click(function () {
+    var tabId = $(this).parent().attr('href');
+    newTab.remove();
+    $(tabId).remove();
+    $('#myTab .nav-item a:first').click();
+  });
+
+  newTab.find('a').click();
+});
+
+</script>
+
+</body>
+</html>

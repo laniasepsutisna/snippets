@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+          integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+          crossorigin="anonymous"/>
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="progress-bar" class="progress progress-xl"></div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    fetch("https://your-url-to-get-data.com/users")
+  .then(response => response.json())
+  .then(data => {
+    var progressBar = document.getElementById("progress-bar");
+    for (var i = 0; i < data.length; i++) {
+        var step = document.createElement("div");
+        if(data[i].status === "approved") {
+            step.classList.add("progress-bar", "progress-bar-striped",  data[i].color);
+        } else {
+            step.classList.add("progress-bar", "progress-bar-striped", "bg-secondary");
+        }
+        step.setAttribute("role", "progressbar");
+        step.setAttribute("style", "width: " + (100 / data.length) + "%");
+        step.setAttribute("aria-valuenow", (100 / data.length));
+        step.setAttribute("aria-valuemin", "0");
+        step.setAttribute("aria-valuemax", "100");
+        step.innerHTML = data[i].name + " (" + data[i].status + ") " + data[i].approvalTime
+        progressBar.appendChild(step);
+    }
+  })
+  .catch(error => console.error(error));
+</script>
+
+</body>
+</html>
