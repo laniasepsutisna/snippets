@@ -1,0 +1,26 @@
+[
+   {
+      "name": "ADIT",
+      "color": "bg-info",
+      "status": "approved",
+      "approvalTime": "01/01/2022"
+   },
+   {
+      "name": "HASTUTI",
+      "color": "bg-danger",
+      "status": "approved",
+      "approvalTime": "01/02/2022"
+   },
+   {
+      "name": "YANI",
+      "color": "bg-success",
+      "status": "pending",
+      "approvalTime": "-"
+   },
+   {
+      "name": "PAK RONY",
+      "color": "bg-success",
+      "status": "pending",
+      "approvalTime": "-"
+   }
+]
